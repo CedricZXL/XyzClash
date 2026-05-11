@@ -91,12 +91,9 @@ class _ProfilesViewState extends State<ProfilesView> {
         : [];
   }
 
+  // === XyzClash: Hide the 'Add Profile' button ===
   Widget _buildFAB() {
-    return CommonFloatingActionButton(
-      onPressed: _handleShowAddExtendPage,
-      icon: const Icon(Icons.add),
-      label: context.appLocalizations.addProfile,
-    );
+    return const SizedBox.shrink();
   }
 
   @override
@@ -341,15 +338,7 @@ class ProfileItem extends StatelessWidget {
                                 //     );
                                 //   },
                                 // ),
-                                if (profile.type == ProfileType.url) ...[
-                                  PopupMenuItemData(
-                                    icon: Icons.copy,
-                                    label: appLocalizations.copyLink,
-                                    onPressed: () {
-                                      _handleCopyLink(context);
-                                    },
-                                  ),
-                                ],
+                                // === XyzClash: Hide 'Copy Link' to protect subscription URL ===
                                 PopupMenuItemData(
                                   icon: Icons.file_copy_outlined,
                                   label: appLocalizations.exportFile,
@@ -359,14 +348,7 @@ class ProfileItem extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            PopupMenuItemData(
-                              danger: true,
-                              icon: Icons.delete_outlined,
-                              label: appLocalizations.delete,
-                              onPressed: () {
-                                _handleDeleteProfile(context);
-                              },
-                            ),
+                            // === XyzClash: Hide 'Delete' to prevent removing the preset profile ===
                           ],
                         ),
                         targetBuilder: (open) {

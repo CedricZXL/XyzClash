@@ -60,8 +60,32 @@ extension InitControllerExt on AppController {
     await _showCrashlyticsTip();
     await _connectCore();
     await _initCore();
+    // === XyzClash: Auto-import default subscription on first launch ===
+    await _autoImportDefaultSubscription();
     await _initStatus();
     _ref.read(initProvider.notifier).value = true;
+  }
+
+  /// XyzClash: Automatically import the hardcoded subscription URL
+  /// if no profiles exist yet (first launch scenario).
+  Future<void> _autoImportDefaultSubscription() async {
+    if (defaultSubscriptionUrl == 'SUBSCRIPTION_URL_PLACEHOLDER') return;
+    final profiles = _ref.read(profilesProvider);
+    if (profiles.isNotEmpty) return;
+    try {
+      commonPrint.log('XyzClash: Auto-importing default subscription...');
+      final profile = await Profile.normal(
+        label: 'XyzClash',
+        url: defaultSubscriptionUrl,
+      ).update();
+      putProfile(profile);
+      commonPrint.log('XyzClash: Default subscription imported successfully');
+    } catch (e) {
+      commonPrint.log(
+        'XyzClash: Failed to auto-import subscription: $e',
+        logLevel: LogLevel.warning,
+      );
+    }
   }
 
   Future<void> _handleFailedPreference() async {
