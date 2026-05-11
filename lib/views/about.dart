@@ -44,13 +44,7 @@ class AboutView extends StatelessWidget {
             _checkUpdate(context);
           },
         ),
-        ListItem(
-          title: const Text('Telegram'),
-          onTap: () {
-            globalState.openUrl('https://t.me/FlClash');
-          },
-          trailing: const Icon(Icons.launch),
-        ),
+        // === XyzClash: Telegram link removed ===
         ListItem(
           title: Text(appLocalizations.project),
           onTap: () {
@@ -62,7 +56,7 @@ class AboutView extends StatelessWidget {
           title: Text(appLocalizations.core),
           onTap: () {
             globalState.openUrl(
-              'https://github.com/chen08209/Clash.Meta/tree/FlClash',
+              'https://github.com/chen08209/Clash.Meta',
             );
           },
           trailing: const Icon(Icons.launch),
