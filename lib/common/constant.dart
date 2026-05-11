@@ -18,7 +18,7 @@ const packageName = 'com.follow.clash';
 final unixSocketPath = '/tmp/XyzClashSocket_${Random().nextInt(10000)}.sock';
 
 // === XyzClash: Hardcoded subscription URL ===
-const defaultSubscriptionUrl = 'SUBSCRIPTION_URL_PLACEHOLDER';
+const defaultSubscriptionUrl = 'https://154.21.195.239:2096/clash/i509paqfbq1lea51';
 const helperPort = 47890;
 const maxTextScale = 1.4;
 const minTextScale = 0.8;
